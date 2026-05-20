@@ -54,7 +54,7 @@ ESP32 Sensors
 
 ## Dashboard
 
-![Dashboard](images/dashboard.png)
+![Dashboard](images/dashboard.PNG)
 
 ---
 
