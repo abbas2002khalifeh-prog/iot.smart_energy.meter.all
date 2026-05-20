@@ -1,0 +1,76 @@
+Smart Energy Meter — Wiring Script Diagram   
+
+
+1. Wiring WITHOUT OLED Display
+
+ESP32 ↔ ZMPT101B Voltage Sensor 
+ZMPT101B Pin	Connect To
+VCC	ESP32 3.3V
+GND	ESP32 GND
+OUT	ESP32 GPIO35
+ESP32 ↔ SCT-013-030 Current Sensor
+SCT-013 Bias Circuit
+Components Required
+100 Ω burden resistor
+2 × 10 kΩ resistors
+10 µF electrolytic capacitor
+Current Sensor Wiring
+SCT-013 Wire	Connect To
+Wire 1	One side of 100 Ω resistor
+Wire 2	GND
+Burden Resistor Connections
+Component Side	Connect To
+Side 1	SCT-013 Wire 1
+Side 2	Bias midpoint + GPIO34
+Voltage Divider (DC Bias)
+Resistor 1 (10 kΩ)
+Pin	Connect To
+Side 1	3.3V
+Side 2	Midpoint
+Resistor 2 (10 kΩ)
+Pin	Connect To
+Side 1	Midpoint
+Side 2	GND
+Midpoint Connections
+
+The midpoint between the two 10 kΩ resistors connects to:
+
+Connect To
+GPIO34
+Burden resistor output
+Capacitor positive leg
+Capacitor Wiring (10 µF)
+Capacitor Pin	Connect To
+Positive (+)	Midpoint
+Negative (-)	GND
+
+2. Wiring WITH OLED Display
+OLED SSD1306 Connections (I2C)
+OLED Pin	Connect To
+VCC	ESP32 3.3V
+GND	ESP32 GND
+SCL	ESP32 GPIO22
+SDA	ESP32 GPIO21
+
+3. Final ESP32 Pin Usage
+ESP32 Pin	Purpose
+GPIO34	Current sensor ADC
+GPIO35	Voltage sensor ADC
+GPIO21	OLED SDA
+GPIO22	OLED SCL
+
+3.3V	Sensor power
+GND	Common ground
+
+4. Important Notes
+GPIO34 and GPIO35 are ADC1 pins and work correctly with WiFi.
+Do NOT use ADC2 pins while WiFi is enabled.
+All GND connections must be common.
+Adjust the ZMPT101B potentiometer during calibration.
+Ensure SCT013 clamps ONLY around ONE live wire.
+Never connect ESP32 directly to AC mains.
+
+5. AC Load Wiring
+AC Wire	Connect To
+Live wire	Through SCT013 clamp
+Neutral wire	Direct to load
